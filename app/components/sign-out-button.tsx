@@ -1,9 +1,10 @@
 "use client";
 import React, { use } from "react";
-import { login, logout } from "../lib/actions/auth";
+import { Button } from "@/app/components/ui/button";
+import { logout } from "../lib/actions/auth";
 
 const SignOutButton = () => {
-  return <button onClick={logout}>SignOut</button>;
+  return <Button onClick={logout}>SignOut</Button>;
 };
 
 export default SignOutButton;

@@ -4,15 +4,13 @@ import { Button } from "@/app/components/ui/button";
 
 const SignInButton = () => {
   return (
-    <div className="mt-10">
-      <Button onClick={() => login()} variant={"outline"}>
-        {" "}
+    <div className="flex flex-col items-center space-y-4">
+      <Button onClick={() => login({ provider: "github" })} variant={"default"}>
         Sign in with Github
       </Button>
-      <button className="bg-red-400 cursor-pointer" onClick={() => login()}>
-        {" "}
-        Sign in With Github
-      </button>
+      <Button onClick={() => login({ provider: "google" })}>
+        Sign in With Google
+      </Button>
     </div>
   );
 };

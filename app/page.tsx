@@ -1,8 +1,9 @@
 "use server";
-import Image from "next/image";
 import Link from "next/link";
 import SignInButton from "@/app/components/sign-in-button";
 import auth from "./auth";
+import { Button } from "./components/ui/button";
+// import SignIn from "./sign-in/page";
 
 export default async function Home() {
   const session = await auth();
