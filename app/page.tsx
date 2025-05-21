@@ -1,9 +1,7 @@
 "use server";
 import Link from "next/link";
-import SignInButton from "@/app/components/sign-in-button";
 import auth from "./auth";
 import { Button } from "./components/ui/button";
-// import SignIn from "./sign-in/page";
 
 export default async function Home() {
   const session = await auth();
@@ -11,7 +9,7 @@ export default async function Home() {
 
   if (session?.user) {
     return (
-      <div className="container">
+      <div className="container mx-auto flex flex-col items-center justify-center ">
         <h1>Welcome, {session.user.name}!</h1>
         <div className="mt-4">
           <Link
@@ -26,10 +24,9 @@ export default async function Home() {
   }
 
   return (
-    <div className="container">
+    <div className="container mx-auto flex flex-col items-center justify-center ">
       <h1 className="text-2xl mb-4">Please Sign In</h1>
       <p className="mb-4">You need to be signed in to access this page.</p>
-      <SignInButton />
     </div>
   );
 }

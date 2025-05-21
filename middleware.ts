@@ -14,6 +14,10 @@ export default async function middleware(request: NextRequest) {
     pathname.startsWith(route)
   );
 
+  if (session?.user && pathname === "/sign-in") {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
   if (isProtectedRoute && !session) {
     return NextResponse.redirect(new URL("/", request.url));
   }

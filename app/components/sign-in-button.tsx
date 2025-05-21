@@ -4,7 +4,7 @@ import { Button } from "@/app/components/ui/button";
 
 const SignInButton = () => {
   return (
-    <div className="flex flex-col items-center space-y-4">
+    <div className="flex items-center">
       <Button onClick={() => login({ provider: "github" })} variant={"default"}>
         Sign in with Github
       </Button>

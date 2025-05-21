@@ -1,22 +1,8 @@
 import Link from "next/link";
 import { auth } from "@/app/auth";
-import SignInButton from "./sign-in-button";
+import Image from "next/image";
 import SignOutButton from "./sign-out-button";
-
-const NavLink = ({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) => (
-  <Link
-    href={href}
-    className="text-gray-700 hover:text-black px-3 py-2 rounded-md text-sm font-medium transition-colors"
-  >
-    {children}
-  </Link>
-);
+import { Button } from "@/app/components/ui/button";
 
 const Navbar = async () => {
   const session = await auth();
@@ -30,23 +16,33 @@ const Navbar = async () => {
               href="/"
               className="flex-shrink-0 text-xl font-semibold text-gray-900"
             >
-              HR Portal
+              Hr Portal
             </Link>
           </div>
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="flex items-center space-x-4">
             {session?.user ? (
               <>
-                <NavLink href="/dashboard">Dashboard</NavLink>
-                <NavLink href="/user-info">User Info</NavLink>
-                <NavLink href="/bookmarks">Bookmarks</NavLink>
+                <span>{"Hello, " + session.user.name + "!"}</span>
+                {session.user.image && (
+                  <Image
+                    src={session.user.image}
+                    alt="User Image"
+                    width={40}
+                    height={40}
+                    className="rounded-full ml-2"
+                  />
+                )}
                 <SignOutButton />
               </>
             ) : (
-              <SignInButton />
+              <>
+                <Button variant="default">
+                  <Link href="/sign-in" className="text-sm">
+                    Sign In
+                  </Link>
+                </Button>
+              </>
             )}
-          </div>
-          <div className="md:hidden flex items-center">
-            {session?.user ? <SignOutButton /> : <SignInButton />}
           </div>
         </div>
       </div>
