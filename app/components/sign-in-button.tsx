@@ -1,10 +1,14 @@
 "use client";
-import React, { use } from "react";
 import { login } from "../lib/actions/auth";
+import { Button } from "@/components/ui/button";
 
 const SignInButton = () => {
   return (
-    <div className="">
+    <div className="mt-10">
+      <Button onClick={() => login()} variant={"outline"}>
+        {" "}
+        Sign in with Github
+      </Button>
       <button className="bg-red-400 cursor-pointer" onClick={() => login()}>
         {" "}
         Sign in With Github
