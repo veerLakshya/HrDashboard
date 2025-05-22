@@ -3,7 +3,17 @@ import Link from "next/link";
 import { auth } from "./../app/auth";
 import { logout } from "../lib/actions/auth";
 import Image from "next/image";
-// import
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -49,7 +59,7 @@ export default async function DropdownMenuDemo() {
           <DropdownMenuContent className="w-44">
             <DropdownMenuLabel>{userName}</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            {/* Profile related */}
+            {/* Profile related Options*/}
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <Link href="/user-info" className="w-full">
@@ -69,8 +79,31 @@ export default async function DropdownMenuDemo() {
               <DropdownMenuItem>Settings</DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            {/* Logout */}
-            <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+            {/* Logout Option with Alert*/}
+            <div className="w-full">
+              <AlertDialog>
+                <AlertDialogTrigger asChild className="w-full">
+                  <Button variant="ghost">Logout</Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Are you absolutely sure you want to Logout?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. This will permanently remove
+                      your bookmarks.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction onClick={logout}>
+                      LogOut
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </div>
           </DropdownMenuContent>
         </div>
       )}

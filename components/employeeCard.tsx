@@ -6,12 +6,10 @@ type User = {
 
 const EmployeeCard = ({ user }: { user: User }) => {
   return (
-    <div className="container">
-      <div>
-        <div>{user.id}</div>
-        <div>{user.firstName}</div>
-        <div>{user.lastName}</div>
-      </div>
+    <div className="container grid grid-cols-5">
+      <div className="p-1">{user.id}</div>
+      <div className="p-1">{user.firstName}</div>
+      <div>{user.lastName}</div>
     </div>
   );
 };
