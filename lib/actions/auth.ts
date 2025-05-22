@@ -1,5 +1,5 @@
 "use server";
-import { signIn, signOut } from "../../auth";
+import { signIn, signOut } from "../../app/auth";
 
 export const login = async ({ provider }: { provider: string }) => {
   await signIn(provider, { redirectTo: "/" });

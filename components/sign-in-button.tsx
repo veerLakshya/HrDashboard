@@ -1,6 +1,6 @@
 "use client";
 import { login } from "../lib/actions/auth";
-import { Button } from "@/app/components/ui/button";
+import { Button } from "./ui/button";
 
 const SignInButton = () => {
   return (

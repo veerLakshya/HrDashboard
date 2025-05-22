@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { UserAuthForm } from "../components/user-auth-form";
+import { UserAuthForm } from "../../components/user-auth-form";
 
 export const metadata: Metadata = {
-  title: "Authentication",
-  description: "Authentication forms built using the components.",
+  title: "Sign In",
+  description: "Sign In Page.",
 };
 
 export default function AuthenticationPage() {

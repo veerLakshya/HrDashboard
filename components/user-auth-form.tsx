@@ -2,10 +2,9 @@
 
 import * as React from "react";
 import { cn } from "../lib/utils";
-import { Icons } from "../components/ui/icons";
-import { Button } from "../components/ui/button";
+import { Icons } from "./ui/icons";
+import { Button } from "./ui/button";
 import { login } from "../lib/actions/auth";
-import auth from "@/app/auth";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 

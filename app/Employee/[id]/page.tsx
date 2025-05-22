@@ -1,4 +1,10 @@
 import { useRouter } from "next/router";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Employee Details",
+  description: "Employee Details Page.",
+};
 
 const EmployeePage = () => {
   const router = useRouter();

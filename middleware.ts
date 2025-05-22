@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { auth } from "./app/auth";
 
-const protectedRoutes = ["/user-info", "/dashboard", "/employee"];
+const protectedRoutes = ["/user-info", "/dashboard", "/employee", "/analytics"];
 
 export default async function middleware(request: NextRequest) {
   console.log("Middleware executed for path:", request.nextUrl.pathname);

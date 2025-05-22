@@ -1,7 +1,6 @@
 "use server";
 import Link from "next/link";
 import auth from "./auth";
-import { Button } from "./components/ui/button";
 
 export default async function Home() {
   const session = await auth();
@@ -9,14 +8,14 @@ export default async function Home() {
 
   if (session?.user) {
     return (
-      <div className="container mx-auto flex flex-col items-center justify-center ">
+      <div className="container mx-auto flex flex-col items-center justify-center">
         <h1>Welcome, {session.user.name}!</h1>
         <div className="mt-4">
           <Link
-            href="/user-info"
+            href="/dashboard"
             className="text-blue-500 hover:text-blue-700 underline"
           >
-            View User Info
+            Go to Dashboard
           </Link>
         </div>
       </div>
