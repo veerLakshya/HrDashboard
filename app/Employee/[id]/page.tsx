@@ -52,12 +52,12 @@ export default function EmployeePage() {
           <div className="text-center">
             <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <User className="w-8 h-8 text-gray-400" />
-            </div>
+            </div>{" "}
             <h1 className="text-xl font-bold text-gray-800 mb-2">
               Employee Not Found
             </h1>
             <p className="text-gray-600 mb-4">
-              The employee you're looking for doesn't exist.
+              The employee you&apos;re looking for doesn&apos;t exist.
             </p>
             <button
               onClick={() => router.back()}
