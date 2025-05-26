@@ -27,6 +27,8 @@ type User = {
   lastName: string;
   email: string;
   phone: string;
+  rating?: number;
+  department?: string;
   address?: {
     address: string;
     city: string;
@@ -37,10 +39,25 @@ type User = {
 
 export const columns: ColumnDef<User>[] = [
   { accessorKey: "id", header: "ID" },
-  { accessorKey: "firstName", header: "First Name" },
-  { accessorKey: "lastName", header: "Last Name" },
-  { accessorKey: "email", header: "Email" },
+  {
+    accessorKey: "name",
+    header: "Name",
+    cell: ({ row }) => `${row.original.firstName} ${row.original.lastName}`,
+  },
+  {
+    accessorKey: "department",
+    header: "Department",
+    cell: ({ row }) => row.original.department || "General",
+  },
   { accessorKey: "phone", header: "Phone" },
+  {
+    accessorKey: "rating",
+    header: "Rating",
+    cell: ({ row }) => {
+      const rating = row.original.rating || Math.floor(Math.random() * 5) + 1;
+      return `⭐ ${rating}/5`;
+    },
+  },
 ];
 
 export function Employees({ users }: { users: User[] }) {

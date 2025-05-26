@@ -13,14 +13,12 @@ const getUsers = async () => {
 };
 
 const EmployeesPage = async () => {
-  const data = await getUsers(); // full response
+  const data = await getUsers();
   const users = data.users;
 
   return (
     <div>
-      {/* {users.map((user: any) => ( */}
       <UserList users={users} />
-      {/* ))} */}
     </div>
   );
 };
