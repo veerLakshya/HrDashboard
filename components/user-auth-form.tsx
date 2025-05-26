@@ -6,7 +6,7 @@ import { Icons } from "./ui/icons";
 import { Button } from "./ui/button";
 import { login } from "../lib/actions/auth";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);

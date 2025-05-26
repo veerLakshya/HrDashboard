@@ -9,7 +9,6 @@ import {
   getPaginationRowModel,
   useReactTable,
   getFilteredRowModel,
-  ColumnFiltersState,
 } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,7 +22,17 @@ import {
 } from "@/components/ui/table";
 
 type User = {
-  [key: string]: any;
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address?: {
+    address: string;
+    city: string;
+    postalCode: string;
+    state: string;
+  };
 };
 
 export const columns: ColumnDef<User>[] = [
@@ -70,9 +79,9 @@ export function Employees({ users }: { users: User[] }) {
                     {header.isPlaceholder
                       ? null
                       : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                   </TableHead>
                 ))}
               </TableRow>

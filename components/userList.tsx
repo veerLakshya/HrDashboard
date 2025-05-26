@@ -1,11 +1,19 @@
 "use client";
 import React from "react";
-import { useState } from "react";
 import { Employees } from "./employeeCard";
-import { Input } from "./ui/input";
 
 type User = {
-  [key: string]: any;
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address?: {
+    address: string;
+    city: string;
+    postalCode: string;
+    state: string;
+  };
 };
 
 export default function UserList({ users }: { users: User[] }) {
