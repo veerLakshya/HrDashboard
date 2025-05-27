@@ -1,4 +1,3 @@
-// UserList: Displays a list of employees with filtering and search functionality
 "use client";
 import React, { useEffect, useState } from "react";
 import { Employees } from "./employeeCard";
@@ -111,7 +110,6 @@ export default function UserList({ users }: { users: User[] }) {
           placeholder="Search by name or email..."
           className="sm:w-80 text-black"
         />
-
         {/* Filters */}
         <div className="flex gap-2 flex-wrap">
           <MultiSelectFilter

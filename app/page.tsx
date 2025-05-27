@@ -17,7 +17,7 @@ export default async function Home() {
 
   return (
     <div className="bg-black">
-      {/* Hero Section */}
+      {/* Hero */}
       <div className="container mx-auto px-4 pt-20 pb-16">
         <div className="text-center mb-16">
           <div className="flex justify-center mb-6">
@@ -52,7 +52,7 @@ export default async function Home() {
         </div>
       </div>
 
-      {/* Features Section */}
+      {/* Features */}
       <div className="bg-zinc-950 py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 text-white">
@@ -92,7 +92,7 @@ export default async function Home() {
         </div>
       </div>
 
-      {/* Benefits Section */}
+      {/* benifits */}
       <div className="container mx-auto px-4 py-20">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-10 text-white">

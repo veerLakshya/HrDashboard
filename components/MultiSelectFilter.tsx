@@ -9,7 +9,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-// MultiSelectFilter: Dropdown component for selecting multiple filter options (e.g., departments, ratings)
 interface MultiSelectFilterProps {
   title: string;
   options: { value: string | number; label: string }[];

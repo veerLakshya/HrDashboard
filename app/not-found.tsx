@@ -45,10 +45,6 @@ export default function NotFound() {
           </Link>
         </div>
       </div>
-
-      <p className="text-gray-500 mt-8 text-sm">
-        &copy; {new Date().getFullYear()} Flamapp.ai. All rights reserved.
-      </p>
     </div>
   );
 }

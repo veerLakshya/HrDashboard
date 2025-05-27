@@ -1,9 +1,6 @@
-// FlamLogo: SVG logo for Flamapp.ai, using the static SVG from public
-// Accepts className and style props for styling, and spreads other valid next/image props
 import Image, { ImageProps } from "next/image";
 import type { CSSProperties } from "react";
 
-// FlamLogoProps omits 'src' and makes 'alt' required (as in next/image)
 interface FlamLogoProps extends Omit<ImageProps, "src"> {
   className?: string;
   style?: CSSProperties;

@@ -9,7 +9,7 @@ const Navbar = async () => {
   return (
     <nav className="bg-black border-b border-zinc-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        {/* Left side */}
+        {/* LS */}
         <div className="flex items-center">
           <Link
             href="/"
@@ -26,7 +26,7 @@ const Navbar = async () => {
             <span>Flam</span>
           </Link>
         </div>
-        {/* Right side */}
+        {/* Rs */}
         <div className="flex items-center space-x-4">
           {session?.user ? (
             <>

@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, AlertTriangle } from "lucide-react";
 import Link from "next/link";
@@ -13,10 +12,7 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error);
-  }, [error]);
+  console.error(error);
 
   const router = useRouter();
 
@@ -60,7 +56,7 @@ export default function Error({
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Go Back</span>
-          </button>{" "}
+          </button>
           <Link
             href="/"
             className="w-full inline-block bg-[#D6FF00] hover:bg-[#c2eb00] text-black px-4 py-3 rounded-md transition-colors duration-200 font-medium text-center"

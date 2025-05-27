@@ -1,7 +1,5 @@
 "use client";
 
-// SearchBar: Input component for searching/filtering users
-
 import { Search, X } from "lucide-react";
 import { useState } from "react";
 

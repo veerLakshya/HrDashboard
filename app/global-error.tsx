@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { AlertTriangle } from "lucide-react";
 import FlamLogo from "@/components/FlamLogo";
 import Link from "next/link";
@@ -12,10 +11,7 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error);
-  }, [error]);
+  console.error(error);
 
   return (
     <html lang="en">
@@ -46,7 +42,6 @@ export default function GlobalError({
             </p>
 
             <div className="space-y-3">
-              {" "}
               <button
                 onClick={() => reset()}
                 className="w-full flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-3 rounded-md border border-zinc-700 hover:border-[#D6FF00] transition-all duration-200 cursor-pointer"

@@ -5,10 +5,11 @@ import { auth } from "./app/auth";
 const protectedRoutes = [
   "/user-info",
   "/dashboard",
-  "/Employee", // Fixed case sensitivity
+  "/Employee",
+  "/employee",
   "/analytics",
-  "/bookmarks", // Added missing protection
-  "/settings", // Added missing protection
+  "/bookmarks",
+  "/settings",
 ];
 
 export default async function middleware(request: NextRequest) {
@@ -17,22 +18,21 @@ export default async function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
-  // Case-insensitive route matching for better protection
+  //case matching
   const isProtectedRoute = protectedRoutes.some((route) =>
     pathname.toLowerCase().startsWith(route.toLowerCase())
   );
 
-  // Redirect authenticated users away from sign-in page
+  // redirect
   if (session?.user && pathname === "/sign-in") {
-    console.log("Redirecting authenticated user from sign-in to home");
+    console.log("redirct signin tto home");
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // Protect routes that require authentication
   if (isProtectedRoute && !session) {
-    console.log(
-      `Redirecting unauthenticated user from protected route: ${pathname}`
-    );
+    // console.log(
+    //   `Redirecting unauthenticated user from protected route: ${pathname}`
+    // );
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
 
@@ -43,15 +43,6 @@ export default async function middleware(request: NextRequest) {
 // Configure which paths trigger this middleware
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - flam-logo.svg (logo file)
-     * - site-icon.ico (site icon)
-     */
     "/((?!api|_next/static|_next/image|favicon.ico|flam-logo.svg|site-icon.ico).*)",
   ],
 };

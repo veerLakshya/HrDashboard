@@ -33,21 +33,20 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     }
   }
   return (
-    <div className={cn("grid gap-6", className)} {...props}>
+    <div className={cn("grid gap-4 sm:gap-6", className)} {...props}>
       {/*continue with */}
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
+          <span className="w-full border-t border-zinc-700" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-black px-2 text-muted-foreground color-white">
-            Continue with
-          </span>
+          <span className="bg-zinc-950 px-3 text-gray-400">Continue with</span>
         </div>
-      </div>{" "}
-      {/* Google sign-in */}
+      </div>
+
+      {/* google signin */}
       <Button
-        className="border border-white cursor-pointer hover:bg-zinc-800 hover:border-[#D6FF00] transition-all duration-200"
+        className="w-full h-11 sm:h-12 border border-zinc-700 bg-zinc-900 text-white hover:bg-zinc-800 hover:border-[#D6FF00] transition-all duration-200 text-sm sm:text-base"
         variant="ghost"
         type="button"
         disabled={isLoading}
@@ -57,12 +56,13 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
           <Icons.google className="mr-2 h-4 w-4" />
-        )}{" "}
-        Google
-      </Button>{" "}
-      {/* github sign-in */}
+        )}
+        Sign in with Google
+      </Button>
+
+      {/* github signin */}
       <Button
-        className="border border-white cursor-pointer hover:bg-zinc-800 hover:border-[#D6FF00] transition-all duration-200"
+        className="w-full h-11 sm:h-12 border border-zinc-700 bg-zinc-900 text-white hover:bg-zinc-800 hover:border-[#D6FF00] transition-all duration-200 text-sm sm:text-base"
         variant="ghost"
         type="button"
         disabled={isLoading}
@@ -72,8 +72,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
           <Icons.gitHub className="mr-2 h-4 w-4" />
-        )}{" "}
-        GitHub
+        )}
+        Sign in with GitHub
       </Button>
     </div>
   );

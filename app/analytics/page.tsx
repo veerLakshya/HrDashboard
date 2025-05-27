@@ -1,6 +1,13 @@
+import { Metadata } from "next";
 import React from "react";
 import { Users, Star, Building, Activity } from "lucide-react";
 import AnalyticsCharts from "./AnalyticsCharts";
+
+export const metadata: Metadata = {
+  title: "Analytics | Flam HR Dashboard",
+  description:
+    "View comprehensive analytics and insights about your team performance, department statistics, and employee data.",
+};
 
 type User = {
   id: number;

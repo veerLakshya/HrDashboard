@@ -1,5 +1,3 @@
-// NavbarSubmenu: Dropdown submenu for user actions and navigation links
-
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { auth } from "./../app/auth";
@@ -38,7 +36,6 @@ export default async function DropdownMenuDemo() {
   const userName = toFirstCapital(session?.user?.name || "");
   return (
     <DropdownMenu>
-      {/* Trigger for dropdown menu of profile */}{" "}
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="py-6 px-4 hover:bg-zinc-800">
           {session?.user && (
@@ -60,13 +57,12 @@ export default async function DropdownMenuDemo() {
       {userName && (
         <div>
           {" "}
-          {/* Dropdown menu content */}
+          {/* dropdown content */}
           <DropdownMenuContent className="w-44 bg-zinc-900 border-zinc-700">
             <DropdownMenuLabel className="text-[#D6FF00] font-medium">
               {userName}
             </DropdownMenuLabel>
-            <DropdownMenuSeparator className="bg-zinc-700" />{" "}
-            {/* Profile related Options*/}
+            <DropdownMenuSeparator className="bg-zinc-700" /> {/* options*/}
             <DropdownMenuGroup>
               <DropdownMenuItem className="hover:bg-zinc-800 focus:bg-zinc-800">
                 <Link
@@ -110,7 +106,7 @@ export default async function DropdownMenuDemo() {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator className="bg-zinc-700" />
-            {/* Logout Option with Alert*/}{" "}
+            {/* lgoout*/}{" "}
             <div className="w-full">
               <AlertDialog>
                 <AlertDialogTrigger asChild className="w-full">
@@ -141,7 +137,7 @@ export default async function DropdownMenuDemo() {
                       Are you absolutely sure you want to Logout?
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                      This action cannot be undone. This will permanently remove
+                      This action cannot be undone. This will permnaently remove
                       your bookmarks.
                     </AlertDialogDescription>
                   </AlertDialogHeader>

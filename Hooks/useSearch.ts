@@ -48,7 +48,7 @@ export const useSearch = (users: User[]) => {
         }
       }
 
-      // Department filter
+      // department filter
       if (filters.departments.length > 0) {
         if (
           !user.department ||
@@ -58,7 +58,7 @@ export const useSearch = (users: User[]) => {
         }
       }
 
-      // Rating filter
+      // rating filter
       if (filters.ratings.length > 0) {
         if (!user.rating || !filters.ratings.includes(user.rating)) {
           return false;
