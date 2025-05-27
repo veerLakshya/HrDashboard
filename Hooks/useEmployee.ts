@@ -1,3 +1,5 @@
+// useEmployee: Provides logic for fetching, updating, and managing employee-specific state and actions. Used for employee details and related operations.
+
 import { useEffect, useState } from "react";
 
 type User = {
@@ -5,7 +7,16 @@ type User = {
   firstName: string;
   lastName: string;
   email: string;
-  [key: string]: any;
+  phone: string;
+  rating?: number;
+  department?: string;
+  image?: string;
+  address?: {
+    address: string;
+    city: string;
+    postalCode: string;
+    state: string;
+  };
 };
 
 const useUser = (userId: number | null) => {
@@ -25,8 +36,13 @@ const useUser = (userId: number | null) => {
           throw new Error(`Failed to fetch user (status ${res.status})`);
         const data = await res.json();
         setUser(data);
-      } catch (err: any) {
-        setError(err.message || "Unknown error");
+      } catch (err) {
+        // TypeScript: err is unknown, so we use type guard to extract message
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Unknown error");
+        }
         setUser(null);
       } finally {
         setLoading(false);

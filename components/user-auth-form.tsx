@@ -40,14 +40,15 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           <span className="w-full border-t" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
+          <span className="bg-black px-2 text-muted-foreground color-white">
             Continue with
           </span>
         </div>
-      </div>
+      </div>{" "}
       {/* Google sign-in */}
       <Button
-        variant="outline"
+        className="border border-white cursor-pointer hover:bg-zinc-800 hover:border-[#D6FF00] transition-all duration-200"
+        variant="ghost"
         type="button"
         disabled={isLoading}
         onClick={(event) => handleClick({ provider: "google", event })}
@@ -58,10 +59,11 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           <Icons.google className="mr-2 h-4 w-4" />
         )}{" "}
         Google
-      </Button>
+      </Button>{" "}
       {/* github sign-in */}
       <Button
-        variant="outline"
+        className="border border-white cursor-pointer hover:bg-zinc-800 hover:border-[#D6FF00] transition-all duration-200"
+        variant="ghost"
         type="button"
         disabled={isLoading}
         onClick={(event) => handleClick({ provider: "github", event })}

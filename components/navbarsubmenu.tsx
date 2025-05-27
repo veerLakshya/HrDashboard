@@ -1,3 +1,5 @@
+// NavbarSubmenu: Dropdown submenu for user actions and navigation links
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { auth } from "./../app/auth";
@@ -76,14 +78,38 @@ export default async function DropdownMenuDemo() {
                   Bookmarks
                 </Link>
               </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="/analytics" className="w-full">
+                  Analytics
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuItem>Settings</DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            {/* Logout Option with Alert*/}
+            {/* Logout Option with Alert*/}{" "}
             <div className="w-full">
               <AlertDialog>
                 <AlertDialogTrigger asChild className="w-full">
-                  <Button variant="ghost">Logout</Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-red-500 hover:text-red-400 hover:bg-zinc-800 group"
+                  >
+                    <span>Logout</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-4 h-4 ml-auto group-hover:translate-x-1 transition-transform"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                      <polyline points="16 17 21 12 16 7"></polyline>
+                      <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                  </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
