@@ -42,7 +42,7 @@ export default function GlobalError({
             <div className="h-1 w-16 bg-gradient-to-r from-red-500 to-orange-500 mx-auto my-6 rounded-full"></div>
 
             <p className="text-gray-400 mb-8">
-              A critical error occurred. We're working to fix the issue.
+              A critical error occurred, i am working to fix the issue.
             </p>
 
             <div className="space-y-3">

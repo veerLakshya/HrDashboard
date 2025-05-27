@@ -38,17 +38,19 @@ export default async function DropdownMenuDemo() {
   const userName = toFirstCapital(session?.user?.name || "");
   return (
     <DropdownMenu>
-      {/* Trigger for dropdown menu of profile */}
+      {/* Trigger for dropdown menu of profile */}{" "}
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="py-6">
+        <Button variant="ghost" className="py-6 px-4 hover:bg-zinc-800">
           {session?.user && (
             <>
-              <span className="">{userName}</span>
+              <span className="text-[#D6FF00] font-semibold text-base mr-4 tracking-wide">
+                {userName}
+              </span>
               <Image
                 src={session.user.image || ""}
                 alt="User Avatar"
-                width={30}
-                height={30}
+                width={32}
+                height={32}
                 className="rounded-full"
               />
             </>
@@ -57,35 +59,57 @@ export default async function DropdownMenuDemo() {
       </DropdownMenuTrigger>
       {userName && (
         <div>
+          {" "}
           {/* Dropdown menu content */}
-          <DropdownMenuContent className="w-44">
-            <DropdownMenuLabel>{userName}</DropdownMenuLabel>
-            <DropdownMenuSeparator />
+          <DropdownMenuContent className="w-44 bg-zinc-900 border-zinc-700">
+            <DropdownMenuLabel className="text-[#D6FF00] font-medium">
+              {userName}
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator className="bg-zinc-700" />{" "}
             {/* Profile related Options*/}
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Link href="/user-info" className="w-full">
+              <DropdownMenuItem className="hover:bg-zinc-800 focus:bg-zinc-800">
+                <Link
+                  href="/user-info"
+                  className="w-full hover:text-[#D6FF00] transition-colors"
+                >
                   Profile
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="/dashboard" className="w-full">
+              <DropdownMenuItem className="hover:bg-zinc-800 focus:bg-zinc-800">
+                <Link
+                  href="/dashboard"
+                  className="w-full hover:text-[#D6FF00] transition-colors"
+                >
                   Dashboard
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="/bookmarks" className="w-full">
+              <DropdownMenuItem className="hover:bg-zinc-800 focus:bg-zinc-800">
+                <Link
+                  href="/bookmarks"
+                  className="w-full hover:text-[#D6FF00] transition-colors"
+                >
                   Bookmarks
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="/analytics" className="w-full">
+              <DropdownMenuItem className="hover:bg-zinc-800 focus:bg-zinc-800">
+                <Link
+                  href="/analytics"
+                  className="w-full hover:text-[#D6FF00] transition-colors"
+                >
                   Analytics
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>Settings</DropdownMenuItem>
+              <DropdownMenuItem className="hover:bg-zinc-800 focus:bg-zinc-800 hover:text-[#D6FF00] transition-colors">
+                <Link
+                  href="/settings"
+                  className="w-full hover:text-[#D6FF00] transition-colors"
+                >
+                  Settings(dummy)
+                </Link>
+              </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator className="bg-zinc-700" />
             {/* Logout Option with Alert*/}{" "}
             <div className="w-full">
               <AlertDialog>

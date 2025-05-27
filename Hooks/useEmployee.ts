@@ -1,4 +1,6 @@
-// useEmployee: Provides logic for fetching, updating, and managing employee-specific state and actions. Used for employee details and related operations.
+// useEmployee:
+// provides logic for fetching, updating, and managing employe specific state and and actions
+// Used for employee details and related operations
 
 import { useEffect, useState } from "react";
 
@@ -23,9 +25,8 @@ const useUser = (userId: number | null) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
   useEffect(() => {
-    if (userId === null) return;
+    if (userId === null || isNaN(userId)) return;
 
     const fetchUser = async () => {
       setLoading(true);

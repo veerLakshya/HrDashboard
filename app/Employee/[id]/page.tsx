@@ -23,7 +23,13 @@ export default function EmployeePage() {
   const params = useParams();
   const router = useRouter();
   const employeeId = params.id as string;
-  const { user: employee, loading, error } = useUser(parseInt(employeeId));
+
+  // Parse the employee ID and handle invalid cases
+  const parsedEmployeeId = employeeId ? parseInt(employeeId) : null;
+  const validEmployeeId =
+    parsedEmployeeId && !isNaN(parsedEmployeeId) ? parsedEmployeeId : null;
+
+  const { user: employee, loading, error } = useUser(validEmployeeId);
   const { isBookmarked, toggleBookmark } = useBookmarks();
 
   const [userExtras, setUserExtras] = useState<{
@@ -49,9 +55,8 @@ export default function EmployeePage() {
       });
     }
   };
-
   // handle loading
-  if (loading) {
+  if (loading && validEmployeeId) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -61,9 +66,12 @@ export default function EmployeePage() {
       </div>
     );
   }
-
   // Show error or not found state
-  if (!employee || error) {
+  if (
+    (!validEmployeeId && employeeId) ||
+    (!employee && !loading && employeeId) ||
+    error
+  ) {
     return (
       <div className="min-h-96 flex items-center justify-center">
         <div className="bg-zinc-900 p-8 rounded-lg shadow-md max-w-md w-full border border-zinc-800">
@@ -75,8 +83,11 @@ export default function EmployeePage() {
               Employee Not Found
             </h1>
             <p className="text-gray-300 mb-4">
-              The employee you&apos;re looking for doesn&apos;t exist.
-            </p>            <button
+              {!validEmployeeId && employeeId
+                ? "Invalid employee ID provided."
+                : "The employee you're looking for doesn't exist."}
+            </p>
+            <button
               onClick={() => router.back()}
               className="px-4 py-2 bg-[#D6FF00] text-black rounded-lg hover:bg-[#B8E600] transition-colors font-medium"
             >
@@ -87,17 +98,26 @@ export default function EmployeePage() {
       </div>
     );
   }
+
+  // Additional safety check - if no employee data, return null
+  if (!employee) {
+    return null;
+  }
+
   return (
     <div className="mb-20">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* back to dashboard*/}
-        <button
-          onClick={() => router.back()}
-          className="mb-6 flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Dashboard
-        </button>        {/* header card */}
+        <div className="mt-10 mb-10">
+          <button
+            onClick={() => router.back()}
+            className="mb-6 flex items-center gap-2 text-gray-300 hover:text-[#] transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Dashboard
+          </button>
+        </div>
+        {/* header card */}
         <div className="bg-zinc-900 rounded-lg shadow-md mb-6 overflow-hidden pb-8 border border-zinc-800">
           {/*gradient */}
           <div className="bg-gradient-to-r from-zinc-800 to-zinc-700 h-20" />
@@ -112,7 +132,8 @@ export default function EmployeePage() {
                   width={120}
                   height={120}
                   className="rounded-full border-4 border-zinc-800 shadow-lg bg-zinc-900"
-                />              ) : (
+                />
+              ) : (
                 <div className="w-30 h-30 bg-gradient-to-br from-zinc-700 to-zinc-600 rounded-full flex items-center justify-center border-4 border-zinc-800 shadow-lg">
                   <span className="text-[#D6FF00] text-3xl font-bold">
                     {employee.firstName?.charAt(0)}
@@ -167,7 +188,6 @@ export default function EmployeePage() {
             </div>
           </div>
         </div>
-
         {/* Main details */}
         <Tabs
           tabs={[
@@ -225,6 +245,7 @@ interface Employee {
   image?: string;
 }
 
+// overview of data from api
 function OverviewTab({
   employee,
   userExtras,
@@ -234,7 +255,7 @@ function OverviewTab({
 }) {
   return (
     <div className="grid lg:grid-cols-3 gap-8">
-      {/* Left side - Contact info and quick stats */}
+      {/* LS - contact info and quick stats */}
       <div className="lg:col-span-1 space-y-8">
         {/* Contact information card */}
         <div className="bg-zinc-900 rounded-xl shadow-md p-6 border border-zinc-800 hover:border-zinc-700 transition-all duration-200">
@@ -270,7 +291,7 @@ function OverviewTab({
             </div>
           </div>
         </div>{" "}
-        {/* Quick stats card */}
+        {/* quick stats card */}
         <div className="bg-zinc-900 rounded-xl shadow-md p-6 border border-zinc-800 hover:border-zinc-700 transition-all duration-200">
           <h2 className="text-xl font-semibold text-white mb-5">Quick Stats</h2>
           <div className="space-y-5">
@@ -307,9 +328,9 @@ function OverviewTab({
           </div>
         </div>
       </div>{" "}
-      {/* Right side - Details */}
+      {/* RS - detailed info*/}
       <div className="lg:col-span-2 space-y-8">
-        {/* Personal details card */}
+        {/* personal details card */}
         <div className="bg-zinc-900 rounded-xl shadow-md p-6 border border-zinc-800 hover:border-zinc-700 transition-all duration-200">
           <h2 className="text-xl font-semibold text-white mb-5">
             Personal Details
@@ -359,7 +380,7 @@ function OverviewTab({
             </div>
           </div>
         </div>{" "}
-        {/* Additional info card */}
+        {/* additional info card */}
         <div className="bg-zinc-900 rounded-xl shadow-md p-6 border border-zinc-800 hover:border-zinc-700 transition-all duration-200">
           <h2 className="text-xl font-semibold text-white mb-5">
             Additional Information
@@ -407,7 +428,7 @@ function OverviewTab({
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-400 mb-2">
-                Company
+                Previous Companies
               </label>
               <p className="text-gray-200">
                 {employee.company?.name || "Not specified"}
@@ -420,7 +441,7 @@ function OverviewTab({
   );
 }
 
-// ProjectsTab: Displays a list of mock projects for the employee
+// dummy projects display
 function ProjectsTab() {
   const mockProjects = [
     {
@@ -454,58 +475,65 @@ function ProjectsTab() {
         "Optimize database queries and improve overall system performance.",
     },
   ];
-
   return (
     <div className="space-y-6">
-      <div className="bg-zinc-900 rounded-lg shadow-md p-6 border border-zinc-800">
-        <h2 className="text-xl font-semibold text-white mb-4">
+      <div className="bg-zinc-900 rounded-xl shadow-md p-6 border border-zinc-800 hover:border-zinc-700 transition-all duration-200">
+        <h2 className="text-xl font-semibold text-white mb-6">
           Current Projects
         </h2>
-        <div className="space-y-4">
+        <div className="space-y-5">
           {mockProjects.map((project) => (
             <div
               key={project.id}
-              className="border border-zinc-700 rounded-lg p-4 bg-zinc-800"
+              className="border border-zinc-700 rounded-xl p-5 bg-zinc-800 hover:bg-zinc-750 transition-all duration-200"
             >
-              <div className="flex items-start justify-between mb-3">
+              <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h3 className="font-semibold text-white">{project.name}</h3>
-                  <p className="text-sm text-gray-300 mt-1">
+                  <h3 className="font-semibold text-white text-lg mb-2">
+                    {project.name}
+                  </h3>
+                  <p className="text-sm text-gray-300 leading-relaxed">
                     {project.description}
                   </p>
                 </div>
                 <span
-                  className={`px-3 py-1 rounded-full text-xs font-medium ${
+                  className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap ml-4 ${
                     project.status === "Completed"
-                      ? "bg-green-900 text-green-200"
+                      ? "bg-green-900/50 text-green-200 border border-green-800"
                       : project.status === "In Progress"
-                      ? "bg-blue-900 text-blue-200"
-                      : "bg-yellow-900 text-yellow-200"
+                      ? "bg-[#D6FF00]/10 text-[#D6FF00] border border-[#D6FF00]/20"
+                      : "bg-yellow-900/50 text-yellow-200 border border-yellow-800"
                   }`}
                 >
                   {project.status}
                 </span>
               </div>
 
-              <div className="flex items-center justify-between text-sm text-gray-300 mb-2">
-                <span>Progress: {project.progress}%</span>
-                <span>Deadline: {project.deadline}</span>
+              <div className="flex items-center justify-between text-sm text-gray-400 mb-3">
+                <span className="flex items-center gap-1">
+                  <span className="text-[#D6FF00]">Progress:</span>{" "}
+                  {project.progress}%
+                </span>
+                <span className="flex items-center gap-1">
+                  <span className="text-[#D6FF00]">Deadline:</span>{" "}
+                  {project.deadline}
+                </span>
                 <span
-                  className={`px-2 py-1 rounded text-xs ${
+                  className={`px-2 py-1 rounded text-xs font-medium ${
                     project.priority === "High"
-                      ? "bg-red-900 text-red-200"
+                      ? "bg-red-900/50 text-red-200 border border-red-800"
                       : project.priority === "Medium"
-                      ? "bg-yellow-900 text-yellow-200"
-                      : "bg-green-900 text-green-200"
+                      ? "bg-yellow-900/50 text-yellow-200 border border-yellow-800"
+                      : "bg-green-900/50 text-green-200 border border-green-800"
                   }`}
                 >
                   {project.priority} Priority
                 </span>
               </div>
 
-              <div className="w-full bg-zinc-700 rounded-full h-2">
+              <div className="w-full bg-zinc-700 rounded-full h-2.5">
                 <div
-                  className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                  className="bg-gradient-to-r from-[#D6FF00] to-[#B8E600] h-2.5 rounded-full transition-all duration-300"
                   style={{ width: `${project.progress}%` }}
                 />
               </div>
@@ -517,7 +545,7 @@ function ProjectsTab() {
   );
 }
 
-// FeedbackTab: Displays recent feedback and a form to add new feedback
+// dummy feedbacks data and form
 function FeedbackTab() {
   const mockFeedback = [
     {
@@ -551,34 +579,33 @@ function FeedbackTab() {
       type: "360 Feedback",
     },
   ];
-
   return (
     <div className="space-y-6">
-      <div className="bg-zinc-900 rounded-lg shadow-md p-6 border border-zinc-800">
-        <h2 className="text-xl font-semibold text-white mb-4">
+      <div className="bg-zinc-900 rounded-xl shadow-md p-6 border border-zinc-800 hover:border-zinc-700 transition-all duration-200">
+        <h2 className="text-xl font-semibold text-white mb-6">
           Recent Feedback
         </h2>
         <div className="space-y-6">
           {mockFeedback.map((feedback) => (
             <div
               key={feedback.id}
-              className="border-l-4 border-blue-500 pl-4 py-2"
+              className="border-l-4 border-[#D6FF00] pl-5 py-3 bg-zinc-800/50 rounded-r-lg hover:bg-zinc-800 transition-all duration-200"
             >
-              <div className="flex items-start justify-between mb-2">
+              <div className="flex items-start justify-between mb-3">
                 <div>
-                  <h3 className="font-semibold text-white">
+                  <h3 className="font-semibold text-white text-lg">
                     {feedback.reviewer}
                   </h3>
                   <p className="text-sm text-gray-400">{feedback.role}</p>
-                </div>
-                <div className="text-right">
+                </div>{" "}
+                <div className="text-right mr-2">
                   <div className="flex items-center gap-1 mb-1">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className={`w-4 h-4 ${
+                        className={`w-4 h-4 mr-0.5 ${
                           i < feedback.rating
-                            ? "text-yellow-500 fill-yellow-500"
+                            ? "text-[#D6FF00] fill-[#D6FF00]"
                             : "text-gray-600"
                         }`}
                       />
@@ -587,8 +614,10 @@ function FeedbackTab() {
                   <p className="text-xs text-gray-500">{feedback.date}</p>
                 </div>
               </div>
-              <p className="text-gray-300 mb-2">{feedback.comment}</p>
-              <span className="inline-block px-2 py-1 bg-zinc-800 text-gray-300 text-xs rounded">
+              <p className="text-gray-300 mb-3 leading-relaxed">
+                {feedback.comment}
+              </p>
+              <span className="inline-block px-3 py-1.5 bg-zinc-800 text-[#D6FF00] text-xs rounded-full border border-zinc-700">
                 {feedback.type}
               </span>
             </div>
@@ -597,35 +626,35 @@ function FeedbackTab() {
       </div>
 
       {/* Add Feedback Form */}
-      <div className="bg-zinc-900 rounded-lg shadow-md p-6 border border-zinc-800">
-        <h3 className="text-lg font-semibold text-white mb-4">
+      <div className="bg-zinc-900 rounded-xl shadow-md p-6 border border-zinc-800 hover:border-zinc-700 transition-all duration-200">
+        <h3 className="text-lg font-semibold text-white mb-5">
           Add New Feedback
         </h3>
-        <div className="space-y-4">
+        <div className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-300 mb-3">
               Rating
             </label>
-            <div className="flex gap-1">
+            <div className="flex gap-2">
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className="w-6 h-6 text-gray-600 hover:text-yellow-500 cursor-pointer transition-colors"
+                  className="w-6 h-6 text-gray-600 hover:text-[#D6FF00] cursor-pointer transition-colors"
                 />
               ))}
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-300 mb-3">
               Comments
             </label>
             <textarea
-              className="w-full p-3 bg-zinc-800 text-white border border-zinc-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full p-4 bg-zinc-800 text-white border border-zinc-700 rounded-lg focus:ring-2 focus:ring-[#D6FF00] focus:border-[#D6FF00] transition-all duration-200"
               rows={4}
               placeholder="Share your feedback..."
             />
           </div>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          <button className="px-6 py-3 bg-[#D6FF00] text-black rounded-lg hover:bg-[#B8E600] transition-colors font-medium">
             Submit Feedback
           </button>
         </div>

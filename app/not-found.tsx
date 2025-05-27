@@ -20,13 +20,13 @@ export default function NotFound() {
 
         <h1 className="text-4xl font-bold text-white mb-2">404</h1>
         <h2 className="text-xl font-semibold text-white mb-4">
-          Page Not Found
+          Page not found
         </h2>
 
         <div className="h-1 w-16 bg-gradient-to-r from-[#D6FF00] to-[#a3c500] mx-auto my-6 rounded-full"></div>
 
         <p className="text-gray-400 mb-8">
-          The page you're looking for doesn't exist or has been moved.
+          The page you are looking for does not exist or has been moved.
         </p>
 
         <div className="space-y-3">
