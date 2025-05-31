@@ -37,13 +37,14 @@ Make sure you have the following installed on your local machine:
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/your-username/hr-dashboard.git
+   git clone https://github.com/veerLakshya/hr-dashboard.git
    cd hr-dashboard
    ```
 
 2. **Install dependencies**
 
    ```bash
+   cd frontend
    npm install
    # or
    yarn install
@@ -55,7 +56,7 @@ Make sure you have the following installed on your local machine:
 
 3. **Set up environment variables**
 
-   Create a `.env.local` file in the root directory and add your authentication providers:
+   Create a `.env.local` file in the `frontend` directory and add your authentication providers:
 
    ```env
    NEXTAUTH_URL=http://localhost:3000
@@ -71,6 +72,8 @@ Make sure you have the following installed on your local machine:
    ```
 
 4. **Run the development server**
+
+   From the `frontend` directory:
 
    ```bash
    npm run dev
@@ -109,19 +112,29 @@ Make sure you have the following installed on your local machine:
 
 ```
 hr-dashboard/
-├── app/                    # Next.js App Router
-│   ├── auth.ts            # NextAuth configuration
-│   ├── dashboard/         # Main dashboard page
-│   ├── Employee/[id]/     # Dynamic employee detail pages
-│   ├── sign-in/           # Authentication pages
-│   └── api/auth/          # Authentication API routes
-├── components/            # Reusable UI components
-│   ├── employeeCard.tsx   # Employee table component
-│   ├── navbar.tsx         # Navigation component
-│   └── ui/                # shadcn/ui components
-├── Hooks/                 # Custom React hooks
-│   └── useEmployee.ts     # Employee data fetching hook
-└── lib/                   # Utility functions
+├── .git/                  # Git repository
+├── frontend/              # Next.js frontend application
+│   ├── app/              # Next.js App Router
+│   │   ├── auth.ts       # NextAuth configuration
+│   │   ├── dashboard/    # Main dashboard page
+│   │   ├── Employee/[id]/ # Dynamic employee detail pages
+│   │   ├── sign-in/      # Authentication pages
+│   │   └── api/auth/     # Authentication API routes
+│   ├── components/       # Reusable UI components
+│   │   ├── employeeCard.tsx # Employee table component
+│   │   ├── navbar.tsx    # Navigation component
+│   │   └── ui/           # shadcn/ui components
+│   ├── Hooks/            # Custom React hooks
+│   │   └── useEmployee.ts # Employee data fetching hook
+│   ├── lib/              # Utility functions
+│   ├── public/           # Static assets
+│   ├── utils/            # Utility functions
+│   ├── package.json      # Frontend dependencies
+│   └── tsconfig.json     # TypeScript configuration
+├── backend/              # Backend services (Go)
+│   └── go.mod           # Go module definition
+├── README.md             # Project documentation
+└── .gitignore           # Git ignore rules
 ```
 
 ## Available Scripts
